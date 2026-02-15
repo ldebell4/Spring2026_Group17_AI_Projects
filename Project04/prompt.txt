@@ -1,0 +1,21 @@
+[Group 6 - Prompt - Project 4]
+
+You are a software developer who wants to try vibe coding a project tracker app for a company thats goal is to make the job application process easier for college students and new grads. Build a single-file app named index.html using vanilla HTML/CSS/JavaScript (no frameworks, or external dependencies) which should include: 
+-A textbox that contains 1 input field where I will put a Github repo url,
+-A list of 12 tasks (e.g., Project 1: Setup, Project 2: Model Topography, Project 3: Deep Research Brief, Project 4: Tracker, Project 5: Data Analysis Memo, Project 6: Visual Explainer, Project 7: Info Pipeline, Project 8: Personal Context, Project 9: Automation, Project 10: AI Powered Build, Project 11: Agent Evaluation, Project 12: HTB Activity) each with:
+• A checkbox next to the Project name to mark completion.
+• A multiline notes text area directly under the task.
+-A ‘Save’ button that exports all data as a JSON file (e.g., progress.json) containing:
+• repoUrl (string), and an array of tasks with [title, completed (boolean), and notes (string)].
+-A ‘Load’ button that imports a JSON file and populates the UI (repo URL, checkboxes, notes).
+• Validate imported JSON (schema + safe defaults); ignore unknown fields; handle errors with a user-friendly
+message
+Some additional details to note: Keep all logic client-side only; no network calls or external storage. Ensure accessible labels, keyboard navigation, and readable contrast. Default state: all tasks unchecked, notes empty, repo URL empty.
+In your response, provide only the index.html file ready for me to paste into a document and run the code.
+
+
+[Refinements/Follow Ups]:
+
+1. Can you change 'launch track' to a more creative name that fits the theme of a company creating an AI system to aid in the job search process for college students and young adults. Can you also add a clear label for the repository text box section in the same font and style as 'project milestones'. Lastly, for the checkboxes can you ensure the check icon is in the center of the box. Also is it possible that when you click on the company name at the top it will take you back to the top of the page *without clearing the box selections.
+
+2. The checks within the box still appear to be off-centered, can you ensure they are centered
