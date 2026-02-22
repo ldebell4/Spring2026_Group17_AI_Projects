@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Tracker - JobEase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .repo-section {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .tasks-section {
+            margin-bottom: 30px;
+        }
+
+        .task {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s;
+        }
+
+        .task:hover {
+            transform: translateX(4px);
+        }
+
+        .task-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .task-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .task.completed .task-title {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.95em;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 32px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .save-btn {
+            background: #667eea;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+        }
+
+        .load-btn {
+            background: #764ba2;
+            color: white;
+        }
+
+        .load-btn:hover {
+            background: #653a8a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(118, 75, 162, 0.4);
+        }
+
+        .load-btn:active, .save-btn:active {
+            transform: translateY(0);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.3s ease-out;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .message.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .message.error {
+            background: #ef4444;
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            text-align: center;
+            color: #666;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Project Tracker</h1>
+            <p class="tagline">Making the job application process easier, one task at a time</p>
+        </header>
+
+        <div class="repo-section">
+            <label for="repoUrl">GitHub Repository URL</label>
+            <input type="text" id="repoUrl" placeholder="https://github.com/username/repository" aria-label="GitHub Repository URL">
+        </div>
+
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">0 of 12 tasks completed (0%)</div>
+
+        <div class="tasks-section">
+            <div class="task" data-task-index="0">
+                <div class="task-header">
+                    <input type="checkbox" id="task-0" aria-label="Mark Project 1: Setup as complete">
+                    <label for="task-0" class="task-title">Project 1: Setup</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 1: Setup"></textarea>
+            </div>
+
+            <div class="task" data-task-index="1">
+                <div class="task-header">
+                    <input type="checkbox" id="task-1" aria-label="Mark Project 2: Model Topography as complete">
+                    <label for="task-1" class="task-title">Project 2: Model Topography</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 2: Model Topography"></textarea>
+            </div>
+
+            <div class="task" data-task-index="2">
+                <div class="task-header">
+                    <input type="checkbox" id="task-2" aria-label="Mark Project 3: Deep Research Brief as complete">
+                    <label for="task-2" class="task-title">Project 3: Deep Research Brief</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 3: Deep Research Brief"></textarea>
+            </div>
+
+            <div class="task" data-task-index="3">
+                <div class="task-header">
+                    <input type="checkbox" id="task-3" aria-label="Mark Project 4: Tracker as complete">
+                    <label for="task-3" class="task-title">Project 4: Tracker</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 4: Tracker"></textarea>
+            </div>
+
+            <div class="task" data-task-index="4">
+                <div class="task-header">
+                    <input type="checkbox" id="task-4" aria-label="Mark Project 5: Data Analysis Memo as complete">
+                    <label for="task-4" class="task-title">Project 5: Data Analysis Memo</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 5: Data Analysis Memo"></textarea>
+            </div>
+
+            <div class="task" data-task-index="5">
+                <div class="task-header">
+                    <input type="checkbox" id="task-5" aria-label="Mark Project 6: Visual Explainer as complete">
+                    <label for="task-5" class="task-title">Project 6: Visual Explainer</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 6: Visual Explainer"></textarea>
+            </div>
+
+            <div class="task" data-task-index="6">
+                <div class="task-header">
+                    <input type="checkbox" id="task-6" aria-label="Mark Project 7: Info Pipeline as complete">
+                    <label for="task-6" class="task-title">Project 7: Info Pipeline</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 7: Info Pipeline"></textarea>
+            </div>
+
+            <div class="task" data-task-index="7">
+                <div class="task-header">
+                    <input type="checkbox" id="task-7" aria-label="Mark Project 8: Personal Context as complete">
+                    <label for="task-7" class="task-title">Project 8: Personal Context</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 8: Personal Context"></textarea>
+            </div>
+
+            <div class="task" data-task-index="8">
+                <div class="task-header">
+                    <input type="checkbox" id="task-8" aria-label="Mark Project 9: Automation as complete">
+                    <label for="task-9" class="task-title">Project 9: Automation</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 9: Automation"></textarea>
+            </div>
+
+            <div class="task" data-task-index="9">
+                <div class="task-header">
+                    <input type="checkbox" id="task-9" aria-label="Mark Project 10: AI Powered Build as complete">
+                    <label for="task-9" class="task-title">Project 10: AI Powered Build</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 10: AI Powered Build"></textarea>
+            </div>
+
+            <div class="task" data-task-index="10">
+                <div class="task-header">
+                    <input type="checkbox" id="task-10" aria-label="Mark Project 11: Agent Evaluation as complete">
+                    <label for="task-10" class="task-title">Project 11: Agent Evaluation</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 11: Agent Evaluation"></textarea>
+            </div>
+
+            <div class="task" data-task-index="11">
+                <div class="task-header">
+                    <input type="checkbox" id="task-11" aria-label="Mark Project 12: HTB Activity as complete">
+                    <label for="task-11" class="task-title">Project 12: HTB Activity</label>
+                </div>
+                <textarea placeholder="Add notes for this task..." aria-label="Notes for Project 12: HTB Activity"></textarea>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="save-btn" id="saveBtn" aria-label="Save progress as JSON file">💾 Save Progress</button>
+            <button class="load-btn" id="loadBtn" aria-label="Load progress from JSON file">📂 Load Progress</button>
+            <input type="file" id="fileInput" accept=".json" aria-label="Choose JSON file to load">
+        </div>
+    </div>
+
+    <script>
+        // Task titles for reference
+        const taskTitles = [
+            'Project 1: Setup',
+            'Project 2: Model Topography',
+            'Project 3: Deep Research Brief',
+            'Project 4: Tracker',
+            'Project 5: Data Analysis Memo',
+            'Project 6: Visual Explainer',
+            'Project 7: Info Pipeline',
+            'Project 8: Personal Context',
+            'Project 9: Automation',
+            'Project 10: AI Powered Build',
+            'Project 11: Agent Evaluation',
+            'Project 12: HTB Activity'
+        ];
+
+        // Get DOM elements
+        const repoUrlInput = document.getElementById('repoUrl');
+        const saveBtn = document.getElementById('saveBtn');
+        const loadBtn = document.getElementById('loadBtn');
+        const fileInput = document.getElementById('fileInput');
+        const tasks = document.querySelectorAll('.task');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        // Update progress bar
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const completed = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            const percentage = Math.round((completed / total) * 100);
+            
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = `${completed} of ${total} tasks completed (${percentage}%)`;
+            
+            const progressBar = document.querySelector('.progress-bar');
+            progressBar.setAttribute('aria-valuenow', percentage);
+        }
+
+        // Add checkbox event listeners
+        tasks.forEach((task, index) => {
+            const checkbox = task.querySelector('input[type="checkbox"]');
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    task.classList.add('completed');
+                } else {
+                    task.classList.remove('completed');
+                }
+                updateProgress();
+            });
+        });
+
+        // Show message notification
+        function showMessage(text, type = 'success') {
+            const existingMessage = document.querySelector('.message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            const message = document.createElement('div');
+            message.className = `message ${type}`;
+            message.textContent = text;
+            message.setAttribute('role', 'alert');
+            document.body.appendChild(message);
+
+            setTimeout(() => {
+                message.style.animation = 'slideOut 0.3s ease-out forwards';
+                setTimeout(() => message.remove(), 300);
+            }, 3000);
+        }
+
+        // Save progress to JSON
+        function saveProgress() {
+            const data = {
+                repoUrl: repoUrlInput.value.trim(),
+                tasks: []
+            };
+
+            tasks.forEach((task, index) => {
+                const checkbox = task.querySelector('input[type="checkbox"]');
+                const textarea = task.querySelector('textarea');
+                
+                data.tasks.push({
+                    title: taskTitles[index],
+                    completed: checkbox.checked,
+                    notes: textarea.value.trim()
+                });
+            });
+
+            const jsonString = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'progress.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showMessage('Progress saved successfully!', 'success');
+        }
+
+        // Validate JSON structure
+        function validateJSON(data) {
+            if (typeof data !== 'object' || data === null) {
+                return { valid: false, error: 'Invalid JSON: data must be an object' };
+            }
+
+            if (typeof data.repoUrl !== 'string') {
+                return { valid: false, error: 'Invalid JSON: repoUrl must be a string' };
+            }
+
+            if (!Array.isArray(data.tasks)) {
+                return { valid: false, error: 'Invalid JSON: tasks must be an array' };
+            }
+
+            for (let i = 0; i < data.tasks.length; i++) {
+                const task = data.tasks[i];
+                if (typeof task !== 'object' || task === null) {
+                    return { valid: false, error: `Invalid JSON: task ${i} must be an object` };
+                }
+                if (typeof task.title !== 'string') {
+                    return { valid: false, error: `Invalid JSON: task ${i} title must be a string` };
+                }
+                if (typeof task.completed !== 'boolean') {
+                    return { valid: false, error: `Invalid JSON: task ${i} completed must be a boolean` };
+                }
+                if (typeof task.notes !== 'string') {
+                    return { valid: false, error: `Invalid JSON: task ${i} notes must be a string` };
+                }
+            }
+
+            return { valid: true };
+        }
+
+        // Load progress from JSON
+        function loadProgress(file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // Validate JSON structure
+                    const validation = validateJSON(data);
+                    if (!validation.valid) {
+                        showMessage(validation.error, 'error');
+                        return;
+                    }
+
+                    // Load repo URL with safe default
+                    repoUrlInput.value = data.repoUrl || '';
+
+                    // Load tasks
+                    tasks.forEach((task, index) => {
+                        const checkbox = task.querySelector('input[type="checkbox"]');
+                        const textarea = task.querySelector('textarea');
+                        
+                        // Use safe defaults if task doesn't exist
+                        const taskData = data.tasks[index] || {
+                            title: taskTitles[index],
+                            completed: false,
+                            notes: ''
+                        };
+
+                        checkbox.checked = taskData.completed === true;
+                        textarea.value = taskData.notes || '';
+                        
+                        if (checkbox.checked) {
+                            task.classList.add('completed');
+                        } else {
+                            task.classList.remove('completed');
+                        }
+                    });
+
+                    updateProgress();
+                    showMessage('Progress loaded successfully!', 'success');
+
+                } catch (error) {
+                    showMessage('Error: Unable to parse JSON file. Please check the file format.', 'error');
+                }
+            };
+
+            reader.onerror = function() {
+                showMessage('Error: Unable to read file. Please try again.', 'error');
+            };
+
+            reader.readAsText(file);
+        }
+
+        // Event listeners
+        saveBtn.addEventListener('click', saveProgress);
+        
+        loadBtn.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.type !== 'application/json' && !file.name.endsWith('.json')) {
+                    showMessage('Error: Please select a valid JSON file.', 'error');
+                    return;
+                }
+                loadProgress(file);
+            }
+            // Reset file input
+            e.target.value = '';
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + S to save
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                saveProgress();
+            }
+            // Ctrl/Cmd + O to load
+            if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+                e.preventDefault();
+                fileInput.click();
+            }
+        });
+
+        // Initialize progress on load
+        updateProgress();
+    </script>
+</body>
+</html>
