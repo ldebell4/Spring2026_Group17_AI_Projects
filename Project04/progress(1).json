@@ -1,0 +1,65 @@
+{
+  "repoUrl": "https://github.com/flopater30/Spring2026_Group17_AI_Projects",
+  "tasks": [
+    {
+      "title": "Project 1: Setup",
+      "completed": true,
+      "notes": "Project introduction"
+    },
+    {
+      "title": "Project 2: Model Topography",
+      "completed": true,
+      "notes": "Trying out different AI models and comparing between them"
+    },
+    {
+      "title": "Project 3: Deep Research Brief",
+      "completed": true,
+      "notes": "Research"
+    },
+    {
+      "title": "Project 4: Tracker",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 5: Data Analysis Memo",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 6: Visual Explainer",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 7: Info Pipeline",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 8: Personal Context",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 9: Automation",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 10: AI Powered Build",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 11: Agent Evaluation",
+      "completed": false,
+      "notes": ""
+    },
+    {
+      "title": "Project 12: HTB Activity",
+      "completed": false,
+      "notes": ""
+    }
+  ]
+}
