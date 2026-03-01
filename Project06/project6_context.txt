@@ -1,0 +1,126 @@
+VISUALIZATION HANDOFF TEMPLATE (For Structured Concept Infographics –
+Flyer Format)
+
+1.  Objective
+
+Create a clean, professional, print-ready infographic that communicates
+a concept clearly in under 60 seconds. The design must prioritize
+structure, hierarchy, and clarity over decorative detail. The viewer
+should understand the core framework at a glance without reading dense
+paragraphs.
+
+2.  Format & Output Requirements
+
+-   High-resolution PNG (print-ready)
+-   Matching PDF version
+-   Legible typography (no tiny text; minimum readable body size)
+-   Balanced margins and spacing
+-   Clean export with no duplicated sections or headers
+
+3.  Structural Logic First (Not Decoration)
+
+Before generating visuals, define:
+
+-   What is the organizing logic?
+    -   Comparison (Do vs Don’t)
+    -   Timeline (Before → During → After)
+    -   Framework tiers
+    -   Checklist
+    -   Matrix
+-   Lock section count.
+    -   EXACT number of sections (e.g., 3 only).
+    -   No duplicate headers.
+    -   No extra footer blocks.
+    -   No structural improvisation.
+
+Structure must be explicitly constrained to prevent duplication or
+drift.
+
+4.  Layout Hierarchy Standard
+
+Top: Large centered title Smaller subtitle underneath
+
+Middle: Primary structured content - If comparison → two-column grid
+with centered category labels - If timeline → stacked horizontal panels
+with clear stage headers - Limit to 4–6 content blocks max
+
+Bottom (Optional but Separate): Secondary reminder strip or summary
+section Visually distinct but not competing
+
+5.  Content Density Rules
+
+-   Maximum 4–6 core categories
+-   Each category = short phrase (3–7 words)
+-   Optional single supporting sentence
+-   Avoid paragraphs
+-   Avoid redundancy
+-   Avoid repeating section titles
+
+Cognitive load must remain low.
+
+6.  Visual Constraints
+
+Color palette: - Soft, muted background (e.g., light lavender / light
+blue) - Navy or charcoal headings - Muted accent tones - No
+oversaturated reds or neon colors
+
+Illustrations: - Flat 2D style - Proportional and consistent - No random
+motion effects or splatter - Icons must match visual language - Avoid
+unnecessary decorative noise
+
+Spacing: - Generous white space - Equal padding between sections -
+Symmetrical alignment
+
+7.  Error Prevention Checklist (Learned from Iteration)
+
+Explicitly prevent: - Duplicate headers - Extra sections appearing at
+bottom - Misplaced tips (logic errors) - Inconsistent illustration
+styles - Oversized icons relative to text - Structural expansion beyond
+defined layout
+
+Always specify: “Exactly [X] sections. No additional blocks. No repeated
+headers.”
+
+8.  Prompt Engineering Strategy
+
+When writing the prompt:
+
+Focus on: - Structural architecture - Visual hierarchy - Segmentation
+logic - Tone and aesthetic - Readability constraints
+
+Avoid: - Over-describing micro details - Listing every icon placement -
+Leaving structure ambiguous
+
+Better to constrain layout than to micromanage artwork.
+
+9.  Design Principles to Preserve
+
+-   Immediate clarity
+-   Logical flow
+-   Visual consistency
+-   Balanced negative space
+-   Print-ready proportions
+-   Instructional tone (not decorative)
+
+10. Reusable Prompt Formula
+
+When generating future concept visualizations:
+
+“Create a clean 8.5x11 portrait infographic using a soft, muted color
+palette and strong visual hierarchy. Structure the layout with a bold
+centered title at the top, followed by a clearly segmented
+[comparison/timeline/framework] section consisting of exactly [X]
+sections. Each section should be visually separated with consistent
+spacing and concise text supported by simple, proportional flat-style
+illustrations. Maintain readability, symmetry, and minimal clutter. No
+duplicated headers or extra blocks.”
+
+What This Handoff Protects You From
+
+-   Structural drift
+-   Layout duplication
+-   Cognitive overload
+-   Visual inconsistency
+-   Poor print formatting
+-   Icon chaos
+-   Unintended expansion
